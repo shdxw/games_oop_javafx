@@ -61,7 +61,28 @@ public class Logic {
     }
 
     public boolean isWin() {
-        return Win.check(convert());
+        boolean rsl = false;
+        int[] axisX = new int[5];
+        int[] axisY = new int[5];
+        for (int i = 6; i < 11 ; i++) {
+            axisX[i - 6] = figures[i].position().getX();
+            axisY[i - 6] = figures[i].position().getY();
+        }
+        if (mono(axisX) || mono(axisY)) {
+            rsl = true;
+        }
+        return rsl;
+    }
+
+    public boolean mono(int[] board) {
+        boolean result = true;
+        for (int j = 0; j < board.length; j++) {
+            if (board[j] != board[0]) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 
     public int[][] convert() {
